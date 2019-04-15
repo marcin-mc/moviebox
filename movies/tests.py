@@ -161,9 +161,9 @@ class MovieTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         results = response.json()
         self.assertEqual(len(results), 3)
-        self.assertEqual(results[0]['title'], 'Batman')
+        self.assertEqual(results[0]['movie_id'], 3)
         self.assertEqual(results[0]['rank'], 1)
-        self.assertEqual(results[1]['title'], 'The Godfather')
+        self.assertEqual(results[1]['movie_id'], 2)
         self.assertEqual(results[1]['rank'], 2)
 
     def test_movies_top_missing_params(self):

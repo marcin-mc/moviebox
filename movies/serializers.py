@@ -10,20 +10,6 @@ from .models import (
 )
 
 
-class CommentListSerializer(ModelSerializer):
-    movie_id = SerializerMethodField()
-    
-    class Meta:
-        model = Comment
-        fields = [
-            'movie_id',
-            'text',
-        ]
-        
-    def get_movie_id(self, obj):
-        return obj.movies.first().id
-
-
 class CommentCreateSerializer(ModelSerializer):
     class Meta:
         model = Comment
@@ -31,6 +17,28 @@ class CommentCreateSerializer(ModelSerializer):
             'text',
             'created',
         ]
+
+
+class CommentListSerializer(ModelSerializer):
+    movie_id = SerializerMethodField()
+
+    class Meta:
+        model = Comment
+        fields = [
+            'movie_id',
+            'text',
+        ]
+
+    def get_movie_id(self, obj):
+        return obj.movies.first().id
+
+
+class MovieDetailSerializer(ModelSerializer):
+    comments = CommentListSerializer(many=True)
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
 
 
 class MovieListSerializer(ModelSerializer):
@@ -66,11 +74,3 @@ class MovieRankSerializer(ModelSerializer):
     
     def get_movie_id(self, obj):
         return obj.id
-
-
-class MovieDetailSerializer(ModelSerializer):
-    comments = CommentListSerializer(many=True)
-    
-    class Meta:
-        model = Movie
-        fields = '__all__'

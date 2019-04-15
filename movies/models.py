@@ -8,9 +8,12 @@ from django.contrib.contenttypes.fields import (
 
 class Comment(models.Model):
     """
-    Comments are implemented using ContentType.
+    For the purpose of this task comments could be
+    implemented using just 'standard' ForeignKey.
+    However, I decided to use contenttypes,
+    what enables us to add possible new models
+    in the future. (e.g. Series).
     """
-
     text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
 

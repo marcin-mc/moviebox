@@ -8,7 +8,7 @@ Views and endpoints handled:
         GET /movies [?<genre=genrename>][?<director=directorname>]
     MovieDeleteUpdateAPIView:
         DELETE /movies/<movie-id>
-        UPDATE /movies/<movie-id>
+        PUT /movies/<movie-id>
     MovieTopAPIView:
         GET /top?from=<yyyy-mm-dd>&to=<yyyy-mm-dd>
 
@@ -79,7 +79,7 @@ class CommentAPIView(CreateModelMixin, ListModelMixin, GenericAPIView):
 
 
 class MovieAPIView(CreateModelMixin, ListModelMixin, GenericAPIView):
-    queryset = Movie.objects.all()
+    queryset = Movie.objects.order_by('title')
     serializer_class = MovieListSerializer
     
     def get(self, request):

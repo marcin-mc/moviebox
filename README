@@ -1,0 +1,44 @@
+Moviebox
+===========================
+
+A simple movie database REST application
+
+Example use
+-----------
+
+Get list of movies:
+GET /movies [?<genre=genrename>][?<director=directorname>]
+Examples:
+GET /movies?director=copolla
+GET /movies?genre=crime&director=copolla
+
+Checkout a movie:
+POST /movies
+Example:
+POST /movies title=superman
+
+Delete movie:
+DELETE /movies/<movie-id>
+Example:
+DELETE /movies/15
+
+Update movie data:
+PUT /movies/<movie-id>
+Example:
+PUT /movies/16 director="Monty Python"
+
+Get list of comments - all or for a movie specified by its id:
+GET /comments [?<movie=id>]
+Examples:
+GET /comments
+GET /comments?movie=16
+
+Post a comment:
+POST /comments movie_id=<movie_id> text=<comment_text>
+Example:
+POST /comments movie_id=16 text="I liked it."
+
+Get ranking of movies:
+GET /top?from=<yyyy-mm-dd>&to=<yyyy-mm-dd>
+Example:
+GET /top?from=2018-10-05&to=2019-04-15
